@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include <unordered_map>
@@ -13,12 +13,12 @@
 #define IDENTIFIERS 3
 #define CONSTANTS 4
 
-#define TABLES_PATH "Tables\\tables.txt"
-#define SIMPLE_DELIMETERS_PATH "Tables\\simplDel.txt"
-#define COMPLEX_DELIMETERS_PATH "Tables\\complexDel.txt"
-#define IDENTIFIERS_PATH "Tables\\identifiers.txt"
-#define CONSTANTS_PATH "Tables\\constants.txt"
-#define ATTRIBUTES_PATH "Tables\\attributes.txt"
+#define KEYWORDS_PATH "Tables\\keywords.tbl"
+#define SIMPLE_DELIMETERS_PATH "Tables\\simplDel.tbl"
+#define COMPLEX_DELIMETERS_PATH "Tables\\complexDel.tbl"
+#define IDENTIFIERS_PATH "Tables\\identifiers.tbl"
+#define CONSTANTS_PATH "Tables\\constants.tbl"
+#define ATTRIBUTES_PATH "Tables\\attributes.tbl"
 
 typedef std::string string;
 typedef char Char;

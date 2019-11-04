@@ -22,22 +22,11 @@ int main() {
 }
 
 void initTables() {
-	informationTables[KEYWORDS] = readTable<InformationTable, string>(TABLES_PATH, [](std::string parsingIdentifier) -> string {return parsingIdentifier; });
+	informationTables[KEYWORDS] = readTable<InformationTable, string>(KEYWORDS_PATH, [](std::string parsingIdentifier) -> string {return parsingIdentifier; });
 	informationTables[SIMPLE_DELIMETERS] = readTable<InformationTable, string>(SIMPLE_DELIMETERS_PATH, [](std::string parsingIdentifier) -> string {return parsingIdentifier; });
 	informationTables[COMPLEX_DELIMETERS] = readTable<InformationTable, string>(COMPLEX_DELIMETERS_PATH, [](std::string parsingIdentifier) -> string {return parsingIdentifier; });
 	informationTables[IDENTIFIERS] = readTable<InformationTable, string>(IDENTIFIERS_PATH, [](std::string parsingIdentifier) -> string {return parsingIdentifier; });
 	informationTables[CONSTANTS] = readTable<InformationTable, string>(CONSTANTS_PATH, [](std::string parsingIdentifier) -> string {return parsingIdentifier; });
 
 	attributes = readTable<AttributesTable, char>(ATTRIBUTES_PATH, [](std::string parsingIdentifier) -> char {return char(atoi(parsingIdentifier.c_str())); });
-
-	for (int i = 0; i < TABLES_QUANTITY; i++) {
-		for (auto &pair : informationTables[i])
-			std::cout << pair.first << '\t' << pair.second << std::endl;
-		std::cout << std::endl;
-	}
-
-	for (auto &pair : attributes) 
-		std::cout << pair.first << '\t' << pair.second << std::endl;
-
-	std::cout << std::endl;
 }
