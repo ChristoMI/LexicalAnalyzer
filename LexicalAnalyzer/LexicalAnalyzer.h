@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <iostream>
 
 class LexicalAnalyzer
 {
