@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 
+#include "Lexem.h"
+
 #define TABLES_QUANTITY 5
 
 #define KEYWORDS 0
@@ -36,15 +38,15 @@ Table readTable(std::string filename, Key(*parse)(std::string), char delimiter =
 
 	std::string inputString;
 	string value;
-	Token code;
+	Token category;
 
 	while (std::getline(inputFile, inputString))
 	{
 		int delimiterPosition = inputString.rfind(delimiter);
 		value = inputString.substr(0, delimiterPosition);
-		code = atoi(inputString.substr(delimiterPosition + 1).c_str());
+		category = atoi(inputString.substr(delimiterPosition + 1).c_str());
 
-		table.insert({ parse(value), code });
+		table.insert({ parse(value), category });
 	}
 
 	inputFile.close();
