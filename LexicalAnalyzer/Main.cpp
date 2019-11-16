@@ -3,7 +3,7 @@
 
 #include "LexicalAnalyzer.h"
 
-#define FILE_PATH "Tests/Case2.txt"
+#define FILE_PATH "Tests/Case3_Delimeters.txt"
 
 InformationTable informationTables[TABLES_QUANTITY];
 AttributesTable attributes;

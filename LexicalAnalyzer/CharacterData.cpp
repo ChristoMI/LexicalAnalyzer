@@ -37,13 +37,23 @@ int CharacterData::corresponds(LexemCode category) {
 	return (int)(this->category == category);
 }
 
-int CharacterData::IS(CharacterClass chClass) {
+int CharacterData::IS(CharacterClass chClass, AttributesTable attributes) {
 	switch (chClass) {
 	case LETTER:
 		return (int)(isalpha(this->data));
 	case DIGIT:
 		return (int)(isdigit(this->data));
-	}
+	case SIGN_DELIMETER_CHARACTER:
+		if (this->data == '<' || this->data == '=' || this->data == '>')
+			return 1;
 
-	return 0;
+		return 0;
+	case WHITESPACE_CHARACTER:
+		for (AttributesTable::const_iterator it = attributes.begin(); it != attributes.end(); it++) {
+			if (this->data == it->first)
+				return 1;
+		}
+
+		return 0;
+	}
 }

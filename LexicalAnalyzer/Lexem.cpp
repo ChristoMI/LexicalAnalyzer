@@ -43,3 +43,19 @@ Lexem& Lexem::operator +=(Character& currentChar) {
 
 	return *this;
 }
+
+bool Lexem::contains(CharacterClass characterClass)
+{
+	switch (characterClass) {
+	case SIGN_DELIMETER_CHARACTER:
+		if (this->data == ">" || this->data == "<" || this->data == "=")
+			return true;
+		
+		return false;
+	case PARENTHESIS_CHARACTER:
+		if (this->data == "(")
+			return true;
+
+		return false;
+	}
+}

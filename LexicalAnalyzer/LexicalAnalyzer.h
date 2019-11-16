@@ -11,16 +11,20 @@
 
 // Logs:
 #define ERROR_INVALID_CHARACTER(x,y) ("Invalid symbol at position" + std::to_string(x) + ", " + std::to_string(y) + "\n")
+#define ERROR_INVALID_OPERATOR(x,y) ("Invalid operator at position" + std::to_string(x) + ", " + std::to_string(y) + "\n")
 
 // LexerState:
+#define INVALID_OPERATOR -2
 #define ERROR -1
 #define NO_LEXEM_FOUND 0 
+
 
 // LexemState:
 #define CONSTANT 1
 #define IDENTIFIER 2
-#define SIMPLE_DELIMETER 3
+#define DELIMETER 3
 #define COMPLEX_DELIMETER 4
+#define COMMENTARY 5
 
 // Positioning:
 #define IDENTIFIERS_OFFSET 400
@@ -46,5 +50,7 @@ public:
 	~LexicalAnalyzer() {};
 
 	void process(std::string, InformationTable*, AttributesTable);
+
+	bool IS(std::string, CharacterClass);
 };
 
