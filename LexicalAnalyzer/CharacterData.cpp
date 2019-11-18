@@ -50,9 +50,19 @@ int CharacterData::IS(CharacterClass chClass, AttributesTable attributes) {
 		return 0;
 	case WHITESPACE_CHARACTER:
 		for (AttributesTable::const_iterator it = attributes.begin(); it != attributes.end(); it++) {
-			if (this->data == it->first)
+			if (this->data == it->first && it->second == WHITESPACE_CHARACTER)
 				return 1;
 		}
+
+		return 0;
+	case COMMENTARY_BODY_CHARACTER:
+		if (this->data == '*')
+			return 1;
+
+		return 0;
+	case COMMENTARY_END_CHARACTER:
+		if (this->data == ')')
+			return 1;
 
 		return 0;
 	}

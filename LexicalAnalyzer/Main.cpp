@@ -3,7 +3,16 @@
 
 #include "LexicalAnalyzer.h"
 
-#define FILE_PATH "Tests/Case3_Delimeters.txt"
+#define CASE1 "Tests/Case1.txt"
+#define CASE2 "Tests/Case2.txt"
+#define CASE3 "Tests/Case3_Delimeters.txt"
+#define CASE4 "Tests/Case4_SimpleDelimeters.txt"
+#define CASE5 "Tests/Case5_WrongCommentary.txt"
+#define CASE5 "Tests/Case5_WrongCommentary.txt"
+#define CASE6 "Tests/Case6_Commentary.txt"
+#define CASE7 "Tests/Case7_WildCommentary.txt"
+#define CASE8 "Tests/Case8_UnclosedCommentary.txt"
+#define CASE9 "Tests/Case9_NoCommentaryStart.txt"
 
 InformationTable informationTables[TABLES_QUANTITY];
 AttributesTable attributes;
@@ -15,7 +24,7 @@ void initTables();
 int main() {
 	initTables();
 	
-	lexer->process(FILE_PATH, &informationTables[0], attributes);
+	lexer->process(CASE9, &informationTables[0], attributes);
 
 	return 0;
 }

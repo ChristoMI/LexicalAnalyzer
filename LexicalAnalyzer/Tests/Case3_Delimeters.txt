@@ -1,1 +1,1 @@
-A <= q >= q <> q > q < q = q + q - q * q / q >< q
+A <= Q >= Q <> Q > Q < Q = Q + Q - Q * Q / Q >< Q 

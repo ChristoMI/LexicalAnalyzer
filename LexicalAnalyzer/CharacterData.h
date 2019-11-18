@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <valarray>
 
 #include "TablesInfo.h"
 
@@ -11,13 +12,17 @@
 #define WHITESPACE_CHARACTER 0
 #define CONSTANT_CHARACTER 1
 #define IDENTIFIER_CHARACTER 2
-
-//#define SIMPLE_DELIMETER 4
+#define SIMPLE_DELIMETER_CHARACTER 3
 #define SIGN_DELIMETER_CHARACTER 40
 
 #define LESS_OR_EQUAL 41
 #define MORE_OR_EQUAL 42
 #define NOT_EQUAL 43
+
+#define COMMENTARY_START_CHARACTER 50
+#define COMMENTARY_END_CHARACTER 51
+
+#define COMMENTARY_BODY_CHARACTER 100
 
 #define INVALID_CHARACTER 6
 

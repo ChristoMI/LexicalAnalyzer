@@ -52,8 +52,11 @@ bool Lexem::contains(CharacterClass characterClass)
 			return true;
 		
 		return false;
-	case PARENTHESIS_CHARACTER:
+	case COMMENTARY_START_CHARACTER:
 		if (this->data == "(")
+			return true;
+	case EMPTY_LEXEM:
+		if (this->data == "")
 			return true;
 
 		return false;

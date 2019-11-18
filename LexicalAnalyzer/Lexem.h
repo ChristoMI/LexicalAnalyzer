@@ -4,7 +4,10 @@
 #include <string>
 
 #define SIGN_DELIMETER_CHARACTER 40
-#define PARENTHESIS_CHARACTER 50
+#define COMMENTARY_START_CHARACTER 50
+
+
+#define EMPTY_LEXEM 7
 
 typedef std::pair<int, int> Position;
 
