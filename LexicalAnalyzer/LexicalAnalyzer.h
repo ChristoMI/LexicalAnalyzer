@@ -32,6 +32,7 @@
 
 // Positioning:
 #define IDENTIFIERS_OFFSET 400
+#define CONSTANTS_OFFSET 1000
 
 typedef std::vector<EncodedLexem> LexemString;
 

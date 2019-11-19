@@ -38,20 +38,20 @@ LexerState LexicalAnalyzer::encodeLexem(InformationTable* infoTables, Lexem& lex
 			return NO_LEXEM_FOUND;
 		}
 		else {
-			Token code = infoTables[IDENTIFIERS].size() + 1;
+			Token code = infoTables[IDENTIFIERS].size() + IDENTIFIERS_OFFSET;
 			infoTables[IDENTIFIERS].insert({ lexem.getData(), code });
 			lexemVector.push_back(EncodedLexem(lexem, code));
 
 			return NO_LEXEM_FOUND;
 		}
 	case CONSTANT:
-		if (searchResult != infoTables[CONSTANTS].end()) {
+		if ((searchResult = infoTables[CONSTANTS].find(lexem.getData())) != infoTables[CONSTANTS].end()) {
 			lexemVector.push_back(EncodedLexem(lexem, searchResult->second));
 
 			return NO_LEXEM_FOUND;
 		}
 		else {
-			Token code = infoTables[CONSTANTS].size() + 1;
+			Token code = infoTables[CONSTANTS].size() + CONSTANTS_OFFSET;
 			infoTables[CONSTANTS].insert({ lexem.getData(), code });
 			lexemVector.push_back(EncodedLexem(lexem, code));
 
@@ -98,7 +98,7 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 		if (currentCharacterData->corresponds(INVALID_CHARACTER)) {
 			lexerState = ERROR;
 
-			addLog(ERROR, Position(currentLexem.getStartingPosition()));
+			addLog(INVALID_CHARACTER, Position(currentRow, currentColumn));
 		}
 		else {
 			switch (lexerState) {
@@ -150,6 +150,11 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 
 					currentLexem.setData(std::string(1, currentCharacterData->getData()));
 					currentLexem.setStartingPosition(currentRow, currentColumn);
+				}
+				else if (currentCharacterData->IS(LETTER)) {
+					lexerState = ERROR;
+
+					addLog(INVALID_CHARACTER, currentLexem.getStartingPosition());
 				}
 				else {
 					lexerState = encodeLexem(informationTables, currentLexem, lexemVector, lexerState);
@@ -239,8 +244,9 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 				else if (currentCharacterData->IS(COMMENTARY_END_CHARACTER) && !currentLexem.contains(EMPTY_LEXEM)) {
 					lexerState = NO_LEXEM_FOUND;
 					currentLexem.setData("");
-
 				}
+				else if(!currentCharacterData->IS(WHITESPACE_CHARACTER, attributesTable))
+					currentLexem.setData("");
 
 				break;
 			}
@@ -254,7 +260,7 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 
 		addLog(UNCLOSED_COMMENTARY, Position(currentLexem.getStartingPosition()));
 	}
-	else
+	else if(lexerState != ERROR)
 		encodeLexem(informationTables, currentLexem, lexemVector, lexerState);
 }
 

@@ -13,6 +13,7 @@
 #define CASE7 "Tests/Case7_WildCommentary.txt"
 #define CASE8 "Tests/Case8_UnclosedCommentary.txt"
 #define CASE9 "Tests/Case9_NoCommentaryStart.txt"
+#define CASE10 "Tests/Case10.txt"
 
 InformationTable informationTables[TABLES_QUANTITY];
 AttributesTable attributes;
@@ -25,7 +26,7 @@ void display(LexicalAnalyzer*);
 int main() {
 	initTables();
 	
-	lexer->process(CASE1, &informationTables[0], attributes);
+	lexer->process(CASE10, &informationTables[0], attributes);
 
 	display(lexer);
 
