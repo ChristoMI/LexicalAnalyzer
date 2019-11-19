@@ -19,7 +19,7 @@ typedef int CharacterClass;
 
 class Lexem
 {
-private:
+protected:
 	string data;
 
 	Position position;

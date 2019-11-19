@@ -14,5 +14,7 @@ public:
 	~EncodedLexem() {};
 
 	void setCategory(LexemCode);
+
+	string toString();
 };
 

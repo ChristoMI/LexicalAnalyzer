@@ -60,5 +60,11 @@ public:
 	void process(std::string, InformationTable*, AttributesTable);
 
 	bool IS(std::string, CharacterClass);
+
+	LexemString getLexemVector();
+
+	LexerState getState();
+
+	string getLog();
 };
 

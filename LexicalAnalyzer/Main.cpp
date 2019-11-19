@@ -20,11 +20,14 @@ AttributesTable attributes;
 LexicalAnalyzer* lexer = new LexicalAnalyzer();
 
 void initTables();
+void display(LexicalAnalyzer*);
 
 int main() {
 	initTables();
 	
-	lexer->process(CASE9, &informationTables[0], attributes);
+	lexer->process(CASE1, &informationTables[0], attributes);
+
+	display(lexer);
 
 	return 0;
 }
@@ -39,4 +42,13 @@ void initTables() {
 	attributes = readTable<AttributesTable, char>(ATTRIBUTES_PATH, [](std::string parsingIdentifier) -> char {return char(atoi(parsingIdentifier.c_str())); });
 
 	int k = 0;
+}
+
+void display(LexicalAnalyzer* lexer) {
+	if (lexer->getState() == ERROR)
+		std::cout << lexer->getLog();
+	else {
+		for (auto &lexem : lexer->getLexemVector()) 
+			std::cout << lexem.toString() << std::endl;
+	}
 }

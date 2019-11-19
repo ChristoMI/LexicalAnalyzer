@@ -22,7 +22,6 @@ void LexicalAnalyzer::addLog(LexemClass currentClass, Position currentPosition) 
 		logMessage += ERROR_UNCLOSED_COMMENTARY(currentPosition.first, currentPosition.second);
 }
 
-
 LexerState LexicalAnalyzer::encodeLexem(InformationTable* infoTables, Lexem& lexem, LexemString& lexemVector, LexerState lexerState) {
 	auto searchResult = infoTables[KEYWORDS].find(lexem.getData());	
 
@@ -133,7 +132,7 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 					lexerState = DELIMETER;
 
 					currentLexem.setData(std::string(1, currentCharacterData->getData()));
-					currentLexem.setStartingPosition(currentLexem.getStartingPosition());
+					currentLexem.setStartingPosition(currentRow, currentColumn);
 				}
 				else {
 					lexerState = encodeLexem(informationTables, currentLexem, lexemVector, lexerState);
@@ -150,7 +149,7 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 					lexerState = DELIMETER;
 
 					currentLexem.setData(std::string(1, currentCharacterData->getData()));
-					currentLexem.setStartingPosition(currentLexem.getStartingPosition());
+					currentLexem.setStartingPosition(currentRow, currentColumn);
 				}
 				else {
 					lexerState = encodeLexem(informationTables, currentLexem, lexemVector, lexerState);
@@ -159,25 +158,6 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 
 				break;
 			case DELIMETER:
-				/*if (currentCharacterData->IS(SIGN_DELIMETER_CHARACTER)) {
-					if (currentLexem.contains(SIGN_DELIMETER_CHARACTER)) {
-						if (IS(currentLexem.getData() + currentCharacterData->getData(), LESS_OR_EQUAL) || 
-							IS(currentLexem.getData() + currentCharacterData->getData(), MORE_OR_EQUAL) ||
-							IS(currentLexem.getData() + currentCharacterData->getData(), NOT_EQUAL)) {
-
-							currentLexem += currentCharacterData->getData();
-
-							lexerState = encodeLexem(informationTables, currentLexem, lexemVector, lexerState = COMPLEX_DELIMETER);
-							currentLexem.setData("");
-						}
-						else {
-							lexerState = ERROR;
-
-							addLog(INVALID_OPERATOR, Position(currentLexem.getStartingPosition()));
-						}
-					}
-				}
-				else*/
 				if (currentCharacterData->IS(WHITESPACE_CHARACTER, attributesTable)) {
 					lexerState = encodeLexem(informationTables, currentLexem, lexemVector, lexerState);
 					currentLexem.setData("");
@@ -186,7 +166,7 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 					encodeLexem(informationTables, currentLexem, lexemVector, lexerState);
 
 					currentLexem.setData(std::string(1, currentCharacterData->getData()));
-					currentLexem.setStartingPosition(currentLexem.getStartingPosition());
+					currentLexem.setStartingPosition(currentRow, currentColumn);
 
 					lexerState = IDENTIFIER;
 				}
@@ -194,7 +174,7 @@ void LexicalAnalyzer::process(std::string programPath, InformationTable* informa
 					encodeLexem(informationTables, currentLexem, lexemVector, lexerState);
 
 					currentLexem.setData(std::string(1, currentCharacterData->getData()));
-					currentLexem.setStartingPosition(currentLexem.getStartingPosition());
+					currentLexem.setStartingPosition(currentRow, currentColumn);
 
 					lexerState = CONSTANT;
 				}
@@ -305,4 +285,16 @@ bool LexicalAnalyzer::IS(std::string lexem, CharacterClass characterClass)
 
 		return false;
 	}
+}
+
+LexemString LexicalAnalyzer::getLexemVector() {
+	return lexemVector;
+}
+
+LexerState LexicalAnalyzer::getState() {
+	return lexerState;
+}
+
+string LexicalAnalyzer::getLog() {
+	return logMessage;
 }
